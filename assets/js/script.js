@@ -43,6 +43,8 @@ function runGame(gameType) {
         displayMultiplicationQuestion(num1, num2)
     } else if (gameType === 'subtraction') {
         displaySubtractionQuestion(num1, num2)
+    } else if (gameType === 'division') {
+        displayDivitionQuestion(num1, num2)
     } else {
         alert(`Unknown game type: ${gameType}`)
         throw `Unknown game type: ${gameType}. Aborting!`
@@ -85,6 +87,8 @@ function calculateCorrectAnswer() {
         return [operand1 * operand2, 'multiplication']
     } else if (operator === '-') {
         return [operand1 - operand2, 'subtraction']
+    } else if (operator === '/') {
+        return [Math.floor(operand1 / operand2), 'division']
     } else {
         alert(`Unimplenented operator ${operator}`)
         throw `Unimplenented operator ${operator}, Aborting!`
@@ -122,6 +126,8 @@ function displayMultiplicationQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "x"
 }
 
-function displayDivitionQuestion() {
-
+function displayDivitionQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1 < operand2 ? operand2 : operand1
+    document.getElementById('operand2').textContent = operand1 < operand2 ? operand1 : operand2
+    document.getElementById('operator').textContent = "/"
 }
