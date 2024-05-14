@@ -1,11 +1,11 @@
 // Wait for the DOM to finish loading before running the game
 // Get the button element and add event listeners to them
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     let buttons = document.getElementsByTagName('button')
 
     for (let button of buttons) {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             if (this.getAttribute('data-type') === 'submit') {
                 checkAnswer()
             } else {
@@ -31,6 +31,8 @@ function runGame(gameType) {
         displayAdditionQuestion(num1, num2)
     } else if (gameType === 'multiplication') {
         displayMultiplicationQuestion(num1, num2)
+    } else if (gameType === 'subtraction') {
+        displaySubtractionQuestion(num1, num2)
     } else {
         alert(`Unknown game type: ${gameType}`)
         throw `Unknown game type: ${gameType}. Aborting!`
@@ -71,6 +73,8 @@ function calculateCorrectAnswer() {
         return [operand1 + operand2, 'addition']
     } else if (operator === 'x') {
         return [operand1 * operand2, 'multiplication']
+    } else if (operator === '-') {
+        return [operand1 - operand2, 'subtraction']
     } else {
         alert(`Unimplenented operator ${operator}`)
         throw `Unimplenented operator ${operator}, Aborting!`
@@ -96,8 +100,10 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "+"
 }
 
-function displaySubtractionQuestion() {
-
+function displaySubtractionQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1 < operand2 ? operand2 : operand1
+    document.getElementById('operand2').textContent = operand1 < operand2 ? operand1 : operand2
+    document.getElementById('operator').textContent = "-"
 }
 
 function displayMultiplicationQuestion(operand1, operand2) {
@@ -107,5 +113,5 @@ function displayMultiplicationQuestion(operand1, operand2) {
 }
 
 function displayDivitionQuestion() {
-    
+
 }
